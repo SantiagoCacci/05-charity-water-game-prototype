@@ -4,6 +4,7 @@ const startScreen = document.getElementById("startScreen");
 const gameUI = document.getElementById("gameUI");
 const board = document.getElementById("gameBoard");
 const movesDisplay = document.getElementById("moves");
+const resetBtn = document.getElementById("resetBtn");
 
 let moves = 0;
 
@@ -11,6 +12,10 @@ let moves = 0;
 startBtn.addEventListener("click", () => {
   startScreen.style.display = "none";
   gameUI.style.display = "block";
+  createBoard();
+});
+// Reset button logic
+resetBtn.addEventListener("click", () => {
   createBoard();
 });
 
@@ -43,4 +48,19 @@ function rotatePipe(pipe) {
 
   moves++;
   movesDisplay.textContent = moves;
+}
+function checkWin() {
+  const pipes = document.querySelectorAll(".pipe");
+
+  let win = true;
+
+  pipes.forEach(pipe => {
+    if (pipe.dataset.rotation != "90") {
+      win = false;
+    }
+  });
+
+  if (win) {
+    alert("💧 Water Delivered Successfully!");
+  }
 }
